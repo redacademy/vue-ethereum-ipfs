@@ -1,6 +1,6 @@
 <template>
-  <section class="hero is-fullheight">
-    <h1 class="hello">Welcome to Your Vue.js App</h1>
+  <section class="hello hero is-fullheight">
+    <h1>Welcome to Your Vue.js App</h1>
   </section>
 </template>
 
