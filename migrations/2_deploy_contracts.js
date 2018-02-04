@@ -1,5 +1,7 @@
+var Academy = artifacts.require('Academy')
+var Coin = artifacts.require('REDCoin')
+
 module.exports = function(deployer) {
-  deployer.deploy(ConvertLib);
-  deployer.autolink();
-  deployer.deploy(MetaCoin);
-};
+  deployer.deploy(Academy)
+  deployer.deploy(Coin)
+}

@@ -2,11 +2,12 @@
   "name": "test",
   "version": "1.0.0",
   "description": "A Vue.js project",
-  "author": "r-shitomi <kilicolico@gmail.com>",
+  "author": "10thfloor <mackenzie@redacademy.com>",
   "private": true,
   "scripts": {
     "dev": "node build/dev-server.js",
     "build": "node build/build.js",
+    "ipfs:publish": "ipfs add -r dist/ > ipfs.txt",
     "unit": "karma start test/unit/karma.conf.js --single-run",
     "e2e": "node test/e2e/runner.js",
     "test": "npm run unit && npm run e2e",
@@ -14,10 +15,14 @@
   },
   "dependencies": {
     "bulma": "^0.2.3",
+    "ipfs": "^0.27.7",
+    "ipfs-api": "^17.5.0",
     "vue": "^2.1.0",
     "vue-router": "^2.1.1",
     "vuex": "^2.0.0",
-    "vuex-router-sync": "^4.0.1"
+    "vuex-router-sync": "^4.0.1",
+    "web3": "^1.0.0-beta.29",
+    "zeppelin-solidity": "^1.6.0"
   },
   "devDependencies": {
     "autoprefixer": "^6.4.0",

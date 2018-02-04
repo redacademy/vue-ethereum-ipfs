@@ -8,16 +8,9 @@
 </template>
 
 <script>
-export default {
-}
+export default {}
 </script>
 
 <style lang="sass">
-  $primary: #ff7a15
   @import "~bulma"
-  .hero 
-    background: none;
-  #app
-    background-image: url('~assets/img/okinawa.jpg')
-    background-size: cover
 </style>
