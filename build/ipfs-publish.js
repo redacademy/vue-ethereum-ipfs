@@ -46,7 +46,7 @@ node.on('ready', () => {
       if (file.path === root) {
         ipfs.name.publish(`${file.hash}`, (err, name) => {
           fs.writeFileSync(
-            path.resolve(__dirname, '../ipfs.txt'),
+            path.resolve(__dirname, '../ipfs.json'),
             JSON.stringify(name)
           )
           node.stop(() =>
