@@ -10,7 +10,7 @@
     "ipfs:publish": "node build/ipfs-publish.js",
     "unit": "karma start test/unit/karma.conf.js --single-run",
     "e2e": "node test/e2e/runner.js",
-    "test": "npm run unit && npm run e2e",
+    "test": "npm run unit && npm run e2e && npm run truffle:test",
     "truffle:test": "truffle test ./test/academy.js --network development",
     "truffle:migrate": "truffle migrate",
     "truffle:deploy:dev": "truffle deploy --network development",
