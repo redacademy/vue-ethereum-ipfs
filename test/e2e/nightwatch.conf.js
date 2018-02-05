@@ -9,7 +9,8 @@ module.exports = {
 
   selenium: {
     start_process: true,
-    server_path: 'node_modules/selenium-server/lib/runner/selenium-server-standalone-2.53.1.jar',
+    server_path:
+      'node_modules/selenium-server/lib/runner/selenium-server-standalone-2.53.1.jar',
     host: '127.0.0.1',
     port: 4444,
     cli_args: {
@@ -23,7 +24,7 @@ module.exports = {
       selenium_host: 'localhost',
       silent: true,
       globals: {
-        devServerURL: 'http://localhost:' + (process.env.PORT || config.dev.port)
+        devServerURL: 'http://localhost:' + config.dev.port
       }
     },
 
