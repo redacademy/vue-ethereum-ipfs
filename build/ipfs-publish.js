@@ -1,61 +1,37 @@
-const IPFS = require('ipfs')
-const ipfsAPI = require('ipfs-api')
-const node = new IPFS()
-const fs = require('fs')
 const path = require('path')
+const DaemonFactory = require('ipfsd-ctl')
+const ipfsDaemon = DaemonFactory.create({ type: 'js' })
 
-const dir = path.resolve(__dirname, '../dist')
-const root = 'vue-ipfs'
-
-// Can't be bothered to get these dynamically.
-const files = [
-  root,
-  `${root}/static`,
-  `${root}/static/css`,
-  `${root}/static/js`,
-  `${root}/static/img`
-]
-
-// https://stackoverflow.com/questions/2727167/how-do-you-get-a-list-of-the-names-of-all-files-present-in-a-directory-in-node-j
-function walkSync(currentDirPath, callback) {
-  fs.readdirSync(currentDirPath).forEach(function(name) {
-    let filePath = path.join(currentDirPath, name)
-    let stat = fs.statSync(filePath)
-    if (stat.isFile()) {
-      callback(filePath, stat)
-    } else if (stat.isDirectory()) {
-      walkSync(filePath, callback)
+console.log('\nStarting local IPFS node...\n')
+ipfsDaemon.spawn(
+  {
+    disposable: false,
+    start: true,
+    init: true
+  },
+  function (err, ipfsd) {
+    if (err) {
+      throw err
     }
-  })
-}
-console.log('\nConnecting local IPFS node...\n')
-node.on('ready', () => {
-  const ipfs = ipfsAPI('localhost', '5001', { protocol: 'http' })
-
-  walkSync(dir, function(filePath, stat) {
-    files.push({
-      path: `${root}${filePath.split('/dist').pop()}`,
-      content: fs.readFileSync(
-        `${path.resolve(__dirname, '../dist')}${filePath.split('/dist').pop()}`
-      )
-    })
-  })
-  console.log('\nPublishing to IPFS...')
-  node.files.add(files, { recursive: true }, (err, filesAdded) => {
-    filesAdded.forEach(file => {
-      if (file.path === root) {
-        ipfs.name.publish(`${file.hash}`, (err, name) => {
-          fs.writeFileSync(
-            path.resolve(__dirname, '../ipfs.json'),
-            JSON.stringify(name)
-          )
-          node.stop(() =>
-            console.log(
-              `\nDone! Vist: https://gateway.ipfs.io/ipns/${name.name}`
-            )
-          )
+    ipfsd.init(err => {
+      ipfsd.start(err => {
+        const dist = path.resolve('./', 'dist')
+        ipfsd.api.util.addFromFs(dist, { recursive: true }, (err, result) => {
+          if (err) {
+            throw err
+          }
+          console.log(result)
+          console.log(`\nThe above files & directories were added to IPFS!\n`)
+          ipfsd.getConfig((err, cfg) => {
+            cfg = JSON.parse(cfg) // wtf
+            const distHash = `${result.pop().hash}`
+            console.log(`Publishing ${distHash} to ${cfg.Identity.PeerID}\n`)
+            ipfsd.api.name.publish(distHash, (err, name) => {
+              console.log(err, name)
+            })
+          })
         })
-      }
+      })
     })
-  })
-})
+  }
+)

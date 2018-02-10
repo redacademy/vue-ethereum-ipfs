@@ -19,7 +19,7 @@
   "dependencies": {
     "bulma": "^0.2.3",
     "ipfs": "^0.27.7",
-    "ipfs-api": "^17.5.0",
+    "ipfsd-ctl": "^0.27.3",
     "vue": "^2.1.0",
     "vue-router": "^2.1.1",
     "vuex": "^2.0.0",

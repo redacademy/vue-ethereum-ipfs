@@ -37,7 +37,7 @@ var webpackConfig = merge(baseWebpackConfig, {
     })
   },
   plugins: [
-    new BaseHrefWebpackPlugin({ baseHref: `/ipns/${IPFSJson.name}/` }),
+    new BaseHrefWebpackPlugin({ baseHref: `/ipns/${IPFSJson.key}/` }),
     // http://vuejs.github.io/vue-loader/en/workflow/production.html
     new webpack.DefinePlugin({
       'process.env': env
