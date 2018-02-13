@@ -12,7 +12,9 @@
                     Vue Front-End + IPFS / Ethereum Backend
                   </h2>
                     <div class="buttons">
-                        <a class="button" href="https://github.com/redacademy/vue-ethereum-ipfs">Github Repo</a>
+                        <a class="button" target="_blank" href="https://github.com/redacademy/vue-ethereum-ipfs">Github Repo</a>
+                        &nbsp;
+                        <router-link to="/contract"><a class="button is-info" href="">Go to App</a></router-link>
                     </div>
                 </div>
                 <div class="column">

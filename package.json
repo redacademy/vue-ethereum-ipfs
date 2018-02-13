@@ -17,14 +17,17 @@
     "lint": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs"
   },
   "dependencies": {
-    "bulma": "^0.2.3",
+    "bulma": "^0.6.2",
     "ipfs": "^0.27.7",
     "ipfsd-ctl": "^0.27.3",
-    "vue": "^2.1.0",
+    "orbit-db": "^0.19.4",
+    "truffle-contract": "^3.0.3",
+    "vue": "^2.5.13",
+    "vue-form": "^4.7.1",
     "vue-router": "^2.1.1",
     "vuex": "^2.0.0",
     "vuex-router-sync": "^4.0.1",
-    "web3": "^1.0.0-beta.29",
+    "web3": "^1.0.0-beta.30",
     "zeppelin-solidity": "^1.6.0"
   },
   "devDependencies": {
@@ -86,7 +89,7 @@
     "url-loader": "^0.5.7",
     "vue-loader": "^10.0.0",
     "vue-style-loader": "^1.0.0",
-    "vue-template-compiler": "^2.1.0",
+    "vue-template-compiler": "^2.5.13",
     "webpack": "^1.13.2",
     "webpack-dev-middleware": "^1.8.3",
     "webpack-hot-middleware": "^2.12.2",

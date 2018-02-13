@@ -1,7 +1,5 @@
-var Academy = artifacts.require('Academy')
-var Coin = artifacts.require('REDCoin')
+var WitnessContract = artifacts.require('WitnessContract')
 
 module.exports = function(deployer) {
-  deployer.deploy(Academy)
-  deployer.deploy(Coin)
+  deployer.deploy(WitnessContract)
 }

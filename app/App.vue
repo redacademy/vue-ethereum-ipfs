@@ -1,8 +1,7 @@
 <template>
   <div id="app">
-    <router-view name="nav"></router-view>
     <transition name="fade" mode="out-in">
-        <router-view class="view"></router-view>
+      <router-view class="view"></router-view>
     </transition>
   </div>
 </template>
@@ -13,4 +12,9 @@ export default {}
 
 <style lang="sass">
   @import "~bulma"
+  html, body
+    /* Hide the right hand scroll bar */
+    overflow-y: auto
+    width: 100vw
+    height: 100vh
 </style>

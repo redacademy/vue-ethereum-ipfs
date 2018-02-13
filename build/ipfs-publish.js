@@ -16,20 +16,18 @@ ipfsDaemon.spawn(
     ipfsd.init(err => {
       ipfsd.start(err => {
         const dist = path.resolve('./', 'dist')
-        ipfsd.api.util.addFromFs(dist, { recursive: true }, (err, result) => {
-          if (err) {
-            throw err
-          }
-          console.log(result)
-          console.log(`\nThe above files & directories were added to IPFS!\n`)
-          ipfsd.getConfig((err, cfg) => {
-            cfg = JSON.parse(cfg) // wtf
-            const distHash = `${result.pop().hash}`
-            console.log(`Publishing ${distHash} to ${cfg.Identity.PeerID}\n`)
-            ipfsd.api.name.publish(distHash, (err, name) => {
-              console.log(err, name)
+        ipfsd.api.util.addFromFs(dist, { recursive: true }).then(filesAdded => {
+          !err && console.log('Files were added...')
+
+          ipfsd.api.name
+            .publish(filesAdded.pop().hash)
+            .then((err, result) => {
+              err && console.log(err)
+              !err && console.log(result)
             })
-          })
+            .catch(err => {
+              console.log('Error was caught', err)
+            })
         })
       })
     })
