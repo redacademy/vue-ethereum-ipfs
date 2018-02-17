@@ -34,7 +34,9 @@ const webpackConfig = merge(baseWebpackConfig, {
   },
   plugins: [
     new BaseHrefWebpackPlugin({
-      baseHref: `/ipns/${process.env.IPFS_PUBKEY}`
+      baseHref: process.env.IPFS_PUBKEY
+        ? `/ipns/${process.env.IPFS_PUBKEY}`
+        : '/'
     }),
     // http://vuejs.github.io/vue-loader/en/workflow/production.html
     new webpack.DefinePlugin({
@@ -139,7 +141,12 @@ const webpackConfig = merge(baseWebpackConfig, {
           'static/js/vendor.*.js',
           'static/js/app.*.js',
           'offline-page.html'
-        ],
+        ].map(
+          path =>
+            process.env.IPFS_PUBKEY
+              ? `ipns/${process.env.IPFS_PUBKEY}/${path}`
+              : path
+        ),
         additional: [':externals:'],
         optional: [':rest:']
       },
