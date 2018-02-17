@@ -6,7 +6,6 @@ const path = require('path')
 
 module.exports = {
   dev: {
-
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
@@ -46,11 +45,15 @@ module.exports = {
   build: {
     // Template for index.html
     index: path.resolve(__dirname, '../dist/index.html'),
-
+    ipnsOptionalPath: process.env.IPFS_PUBKEY
+      ? `ipns/${process.env.IPFS_PUBKEY}/`
+      : '',
     // Paths
     assetsRoot: path.resolve(__dirname, '../dist'),
     assetsSubDirectory: 'static',
-    assetsPublicPath: '/',
+    assetsPublicPath: process.env.IPFS_PUBKEY
+      ? `/ipns/${process.env.IPFS_PUBKEY}/`
+      : '/',
 
     /**
      * Source Maps

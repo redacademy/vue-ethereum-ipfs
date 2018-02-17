@@ -5,18 +5,19 @@
   "author": "10thfloor <remember.mackenzie@gmail.com>",
   "private": true,
   "scripts": {
-    "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
+    "dev":
+      "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
     "start": "npm run dev",
     "unit": "jest --config test/unit/jest.conf.js --coverage",
     "e2e": "node test/e2e/runner.js",
     "test": "npm run unit && npm run e2e",
     "lint": "eslint --ext .js,.vue src test/unit test/e2e/specs",
-    "build": "node build/build.js"
+    "build": "export IPFS_PUBKEY= && node build/build.js",
+    "build:ipfs": "node build/build.js",
+    "publish:ipfs": "node build/build.js && node build/ipfs-publish.js"
   },
   "dependencies": {
     "bulma": "^0.6.2",
-    "ipfs": "^0.27.7",
-    "ipfsd-ctl": "^0.28.0",
     "orbit-db": "^0.19.4",
     "truffle-contract": "^3.0.3",
     "vue": "^2.5.2",
@@ -55,7 +56,10 @@
     "extract-text-webpack-plugin": "^3.0.0",
     "file-loader": "^1.1.4",
     "friendly-errors-webpack-plugin": "^1.6.1",
+    "go-ipfs-dep": "^0.4.13",
     "html-webpack-plugin": "^2.30.1",
+    "ipfs": "^0.27.7",
+    "ipfsd-ctl": "^0.28.0",
     "jest": "^22.0.4",
     "jest-serializer-vue": "^0.3.0",
     "nightwatch": "^0.9.12",
@@ -86,9 +90,5 @@
     "node": ">= 9.0.0",
     "npm": ">= 5.5.1"
   },
-  "browserslist": [
-    "> 1%",
-    "last 2 versions",
-    "not ie <= 8"
-  ]
+  "browserslist": ["> 1%", "last 2 versions", "not ie <= 8"]
 }

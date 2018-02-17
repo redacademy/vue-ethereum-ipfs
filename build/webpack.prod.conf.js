@@ -134,29 +134,28 @@ const webpackConfig = merge(baseWebpackConfig, {
     ]),
     new OfflinePlugin({
       safeToUseOptionalCaches: true,
-      publicPath: '/',
+      publicPath: `${config.build.ipnsOptionalPath}`,
       caches: {
         main: [
-          'static/css/app.*.css',
-          'static/js/vendor.*.js',
-          'static/js/app.*.js',
-          'offline-page.html'
-        ].map(
-          path =>
-            process.env.IPFS_PUBKEY
-              ? `ipns/${process.env.IPFS_PUBKEY}/${path}`
-              : path
-        ),
+          `${config.build.ipnsOptionalPath}static/css/app.*.css`,
+          `${config.build.ipnsOptionalPath}static/js/vendor.*.js`,
+          `${config.build.ipnsOptionalPath}static/js/app.*.js`
+        ],
         additional: [':externals:'],
         optional: [':rest:']
       },
-      externals: ['/'],
+      externals: [
+        `${config.build.ipnsOptionalPath}/offline-page.html`,
+        `${config.build.ipnsOptionalPath}index.html`
+      ],
       ServiceWorker: {
         navigateFallbackURL: '/'
       },
       AppCache: {
         FALLBACK: {
-          '/': '/offline-page.html'
+          [`${config.build.ipnsOptionalPath || '/'}`]: `${
+            config.build.ipnsOptionalPath
+          }/offline-page.html`
         }
       }
     })
