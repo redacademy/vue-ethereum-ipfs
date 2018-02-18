@@ -30,7 +30,7 @@ Tested with:
   },
 ```
 
-## 🙌 How do I use this to make indestructable Vue apps that speak Ethereum?
+## 🙌 How do I use this to make indestructable Vue apps that speak Ethereum? 🙌
 
 ### Before you start
 
@@ -69,7 +69,7 @@ Private Keys
 ```
 
 ### Create Smart Contracts
-The easiest way to start developing your Smart contracts: <br/>
+The easiest way to start developing Smart Contracts: <br/>
 #### [https://remix.ethereum.org/](https://remix.ethereum.org/)
 
 ### Add contracts to the App
