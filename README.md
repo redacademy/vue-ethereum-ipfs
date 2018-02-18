@@ -89,7 +89,6 @@ import contractJSON from '../build/contracts/Contract.json'
 import contract from 'truffle-contract'
 import Web3 from 'web3'
 
-/* eslint-disable */
 if (typeof web3 !== 'undefined') {
   web3 = new Web3(web3.currentProvider)
 } else {
@@ -122,7 +121,7 @@ const saveContract = async c => {
       gas: 5000000,
       gasPrice: '20000000000000'
     })
-  // TODO
+
   createdContract
     .on('error', () => {})
     .on('receipt', () => {})
