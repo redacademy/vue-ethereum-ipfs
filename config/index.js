@@ -45,14 +45,23 @@ module.exports = {
   build: {
     // Template for index.html
     index: path.resolve(__dirname, '../dist/index.html'),
+
+    // Used in webpack.prod.conf.js
+    // When deployed to ipns this url is the 'ipns root'.
+    // Your ipfs site url will look something like this:
+    // https://ipfs.io/ipns/QmQozMTQHW9g6fKmHerVHoKQNQo4zhfXQMsWMTuJ6D1sJd <- ipfs repo public key
+    // and all assets will be addressed from your index.html using the 'ipns root' eg:
+    // src="/ipns/QmQozMTQHW9g6fKmHerVHoKQNQo4zhfXQMsWMTuJ6D1sJd/static/app.js"
     ipnsOptionalPath: process.env.IPFS_PUBKEY
       ? `ipns/${process.env.IPFS_PUBKEY}/`
       : '',
     // Paths
     assetsRoot: path.resolve(__dirname, '../dist'),
     assetsSubDirectory: 'static',
+
+    // Tell Webpack to append all asset paths (eg /static/app.js) with the 'ipns root'.
     assetsPublicPath: process.env.IPFS_PUBKEY
-      ? `/ipns/${process.env.IPFS_PUBKEY}/`
+      ? `/ipns/${process.env.IPFS_PUBKEY}/` //
       : '/',
 
     /**

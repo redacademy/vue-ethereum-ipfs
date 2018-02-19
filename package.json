@@ -13,8 +13,8 @@
     "test": "npm run unit && npm run e2e",
     "lint": "eslint --ext .js,.vue src test/unit test/e2e/specs",
     "build": "export IPFS_PUBKEY= && node build/build.js",
-    "build:ipfs": "node build/build.js",
-    "publish:ipfs": "node build/build.js && node build/ipfs-publish.js"
+    "publish:ipfs":
+      "npm run test && node build/build.js && node build/ipfs-publish.js"
   },
   "dependencies": {
     "bulma": "^0.6.2",

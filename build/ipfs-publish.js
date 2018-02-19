@@ -5,6 +5,8 @@ const ipfsDaemon = DaemonFactory.create({ type: 'go' })
 console.log('\nStarting local IPFS node...\n')
 ipfsDaemon.spawn(
   {
+    // Set disposable to false to publish to your
+    // IPFS repo public key
     disposable: false
   },
   function(err, ipfsd) {
@@ -17,8 +19,8 @@ ipfsDaemon.spawn(
         console.log(filesAdded)
         console.log('\nFiles were added... Publishing...\n')
         ipfsd.api.name.publish(filesAdded.pop().hash).then(result => {
-          console.log('Site was published!\n')
-          console.log(`Visit: https://gateway.ipfs.io/ipns/${result.name}`)
+          console.log('Site was published!')
+          console.log(`\nVisit: https://gateway.ipfs.io/ipns/${result.name}\n`)
           ipfsd.stop()
         })
       })
