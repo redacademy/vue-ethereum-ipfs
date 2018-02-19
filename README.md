@@ -2,21 +2,6 @@
 Web 3.0 Application Starter: Vue front-end, Ethereum / IPFS Backend
 
 
-### Build and deploy commands
-```
- "scripts": {
-    "dev":
-      "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
-    "start": "npm run dev",
-    "unit": "jest --config test/unit/jest.conf.js --coverage",
-    "e2e": "node test/e2e/runner.js",
-    "test": "npm run unit && npm run e2e",
-    "lint": "eslint --ext .js,.vue src test/unit test/e2e/specs",
-    "build": "export IPFS_PUBKEY= && node build/build.js",
-    "publish:ipfs": "npm run test && node build/build.js && node build/ipfs-publish.js"
-  },
-```
-
 ## 🙌 How do I use this to make indestructable Vue apps that speak Ethereum? 🙌
 
 ### Before you start
@@ -55,7 +40,28 @@ Private Keys
 (3) 683746dee343d96dd792130b01febc0d75dd5a540fae79350db6ed9f597d
 ```
 
-### Create Smart Contracts
+### Install the Vue packages
+```
+$ npm install
+```
+
+### Vue Build and deploy commands
+```
+ "scripts": {
+    "dev":
+      "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
+    "start": "npm run dev",
+    "unit": "jest --config test/unit/jest.conf.js --coverage",
+    "e2e": "node test/e2e/runner.js",
+    "test": "npm run unit && npm run e2e",
+    "lint": "eslint --ext .js,.vue src test/unit test/e2e/specs",
+    "build": "export IPFS_PUBKEY= && node build/build.js",
+    "publish:ipfs": "npm run test && node build/build.js && node build/ipfs-publish.js"
+  },
+```
+
+### Create Your Own Smart Contracts
+
 The easiest way to start developing Smart Contracts: <br/>
 #### [https://remix.ethereum.org/](https://remix.ethereum.org/)
 
