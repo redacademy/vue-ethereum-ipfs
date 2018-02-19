@@ -64,12 +64,17 @@ $ npm install
   },
 ```
 
+```
+$ npm start
+Your application is running here: http://localhost:8081
+```
+
 ### Create Your Own Smart Contracts
 
 The easiest way to start developing Smart Contracts: <br/>
 #### [https://remix.ethereum.org/](https://remix.ethereum.org/)
 
-### Add contracts to the App
+### Add contracts to the Vue App
 
 - Add all of your contracts (.sol files) to the `/contracts` directory
 - Run: `truffle compile && truffle migrate --network development`
