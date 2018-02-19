@@ -82,7 +82,7 @@ The easiest way to start developing Smart Contracts: <br/>
 Importing contracts is done in `src/web3Service.js` <br/>
 
 Example `web3Service.js`
-```
+```js
 // Replace this with your main contract!
 import contractJSON from '../build/contracts/Contract.json'
 
