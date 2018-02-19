@@ -1,5 +1,5 @@
 # vue-ethereum-ipfs
-Web 3.0 Application Starter: Vue front-end, Ethereum / IPFS Backend
+Distributed Application Starter: Vue front-end, Ethereum / IPFS Backend
 
 Ethereum is a distributed virtual machine that pays eth in return for miners running
 your smart contracts. IPFS is a kind of distributed content distribution network. Vue
