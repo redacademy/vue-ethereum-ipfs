@@ -1,36 +1,12 @@
 # vue-ethereum-ipfs
 Web 3.0 Application Starter: Vue front-end, Ethereum / IPFS Backend
 
-Tested with:
+Ethereum is a distributed virtual machine that pays eth in return for miners running
+your smart contracts. IPFS is a kind of distributed content distribution network. Vue
+is a javascript framework for building client-side webapps. By keeping state inside
+ethereum and using IPFS to deliver HTML, webapps can become nearly indestructable!
 
-```
-"engines": {
-    "node": ">= 9.0.0",
-    "npm": ">= 5.5.1"
-}
-```
-
-* go version go1.9.4 darwin/amd64
-* ipfs version 0.4.11
-* Ganache CLI v6.0.3 (ganache-core: 2.0.2)  
-* Google Chrome 64.0.3282.167 (Official Build) (64-bit)
-
-### Build and deploy commands
-```
- "scripts": {
-    "dev":
-      "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
-    "start": "npm run dev",
-    "unit": "jest --config test/unit/jest.conf.js --coverage",
-    "e2e": "node test/e2e/runner.js",
-    "test": "npm run unit && npm run e2e",
-    "lint": "eslint --ext .js,.vue src test/unit test/e2e/specs",
-    "build": "export IPFS_PUBKEY= && node build/build.js",
-    "publish:ipfs": "npm run test && node build/build.js && node build/ipfs-publish.js"
-  },
-```
-
-## 🙌 How do I use this to make indestructable Vue apps that speak Ethereum? 🙌
+## How do I use this to make indestructable Vue apps that speak Ethereum? 
 
 ### Before you start
 
@@ -68,11 +44,37 @@ Private Keys
 (3) 683746dee343d96dd792130b01febc0d75dd5a540fae79350db6ed9f597d
 ```
 
-### Create Smart Contracts
+### Install the Vue packages
+```
+$ npm install
+```
+
+### Vue Build and deploy commands
+```
+ "scripts": {
+    "dev":
+      "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
+    "start": "npm run dev",
+    "unit": "jest --config test/unit/jest.conf.js --coverage",
+    "e2e": "node test/e2e/runner.js",
+    "test": "npm run unit && npm run e2e",
+    "lint": "eslint --ext .js,.vue src test/unit test/e2e/specs",
+    "build": "export IPFS_PUBKEY= && node build/build.js",
+    "publish:ipfs": "npm run test && node build/build.js && node build/ipfs-publish.js"
+  },
+```
+
+```
+$ npm start
+Your application is running here: http://localhost:8081
+```
+
+### Create Your Own Smart Contracts
+
 The easiest way to start developing Smart Contracts: <br/>
 #### [https://remix.ethereum.org/](https://remix.ethereum.org/)
 
-### Add contracts to the App
+### Add contracts to the Vue App
 
 - Add all of your contracts (.sol files) to the `/contracts` directory
 - Run: `truffle compile && truffle migrate --network development`
@@ -140,6 +142,15 @@ const getContract = async address => {
 export { saveContract }
 
 ```
+
+Tested with:
+
+* Node (>=)9.0.0
+* go version go1.9.4 darwin/amd64
+* ipfs version 0.4.11
+* Ganache CLI v6.0.3 (ganache-core: 2.0.2)  
+* Google Chrome 64.0.3282.167 (Official Build) (64-bit)
+
 ---
 ### Links
 TODO
