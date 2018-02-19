@@ -1,19 +1,6 @@
 # vue-ethereum-ipfs
 Web 3.0 Application Starter: Vue front-end, Ethereum / IPFS Backend
 
-Tested with:
-
-```
-"engines": {
-    "node": ">= 9.0.0",
-    "npm": ">= 5.5.1"
-}
-```
-
-* go version go1.9.4 darwin/amd64
-* ipfs version 0.4.11
-* Ganache CLI v6.0.3 (ganache-core: 2.0.2)  
-* Google Chrome 64.0.3282.167 (Official Build) (64-bit)
 
 ### Build and deploy commands
 ```
@@ -140,6 +127,15 @@ const getContract = async address => {
 export { saveContract }
 
 ```
+
+Tested with:
+
+* Node (>=)9.0.0
+* go version go1.9.4 darwin/amd64
+* ipfs version 0.4.11
+* Ganache CLI v6.0.3 (ganache-core: 2.0.2)  
+* Google Chrome 64.0.3282.167 (Official Build) (64-bit)
+
 ---
 ### Links
 TODO
