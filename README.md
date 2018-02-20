@@ -149,4 +149,5 @@ Tested with:
 
 ---
 ### Links
-TODO
+
+Teach and learn JavaScript with us at RED Academy: https://redacademy.com/
