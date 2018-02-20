@@ -108,18 +108,21 @@ const Contract = contract({
 
 Contract.setProvider(web3.currentProvider)
 
-const saveContract = async c => {
+const createContractInstance = async c => {
   // https://github.com/trufflesuite/truffle-contract/issues/70
   const newContract = new web3.eth.Contract(contractJSON.abi)
 
   const createdContract = await newContract
     .deploy({
       data: contractJSON.bytecode,
+      
+      // If your contract has constructor parameters, pass them here.
       arguments: [c.name, c.terms]
     })
     .send({
       from: web3.eth.defaultAccount,
-      // Someone help me understand this.
+      
+      // Gas. These are recommended defaults.
       gas: 5000000,
       gasPrice: '20000000000000'
     })
@@ -129,17 +132,10 @@ const saveContract = async c => {
     .on('receipt', () => {})
     .on('confirmation', () => {})
 
-  await getContract(createdContract.options.address)
+  return await Contract.at(address)
 }
 
-const getContract = async address => {
-  const contract = await Contract.at(address)
-  
-  // Here is your contract instance!
-  console.log(contract)
-}
-
-export { saveContract }
+export { createContractInstance }
 
 ```
 
