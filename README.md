@@ -4,9 +4,9 @@ Distributed Application Starter: Vue front-end, Ethereum / IPFS Backend
 Ethereum is a distributed virtual machine that pays eth in return for miners running
 your smart contracts. IPFS is a kind of distributed content distribution network. Vue
 is a javascript framework for building client-side webapps. By keeping state inside
-ethereum and using IPFS to deliver HTML, webapps can become nearly indestructable!
+ethereum and using IPFS to deliver HTML, webapps can become nearly indestructible!
 
-## How do I use this to make indestructable Vue apps that speak Ethereum? 
+## How do I use this to make indestructible Vue apps that speak Ethereum? 
 
 ### Before you start
 
