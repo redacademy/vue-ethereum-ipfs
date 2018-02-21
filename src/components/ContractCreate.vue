@@ -85,7 +85,7 @@ export default {
         terms: '',
         participant1: undefined, // Add an Ethereum wallet acccount public key
         participant2: undefined, // Add another Ethereum account public key
-        witness: web3.eth.defaultAccount
+        witness: this.$store.state.defaultEthWallet
       }
     }
   },

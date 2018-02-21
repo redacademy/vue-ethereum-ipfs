@@ -1,5 +1,13 @@
-import contractJSON from '../build/contracts/ExampleContract.json'
 import contract from 'truffle-contract'
+import Web3 from 'web3'
+
+import contractJSON from '../build/contracts/WitnessContract.json'
+
+if (typeof web3 !== 'undefined') {
+  web3 = new Web3(web3.currentProvider)
+} else {
+  web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545'))
+}
 
 const Contract = contract({
   abi: contractJSON.abi,
@@ -8,14 +16,30 @@ const Contract = contract({
 
 Contract.setProvider(web3.currentProvider)
 
-const setDefaultWeb3Account = () => {
-  return new Promise((resolve, reject) => {
+const getNetIdString = async () => {
+  const id = await web3.eth.net.getId()
+  switch (id) {
+    case '1':
+      return 'Main Ethereum Network'
+    case '2':
+      return 'Morden Test Network (Depricated)'
+    case '3':
+      return 'Ropsten Test Network'
+    case 'loading':
+      return undefined
+    // Will be some random number when connected locally
+    default:
+      return 'Local Test Net'
+  }
+}
+
+const setDefaultWeb3Account = () =>
+  new Promise((resolve, reject) => {
     web3.eth.getAccounts((err, res) => {
       if (!err) return resolve(res[0])
       reject(err)
     })
   })
-}
 
 const createContractInstance = async c => {
   // https://github.com/trufflesuite/truffle-contract/issues/70
@@ -25,8 +49,8 @@ const createContractInstance = async c => {
     .deploy({
       data: contractJSON.bytecode,
 
-      // If your contract has constructor parameters, pass them here.
-      arguments: [c.greeting]
+      // Contract constructor arguments
+      arguments: [c.name, c.terms]
     })
     .send({
       from: web3.eth.defaultAccount,
@@ -44,4 +68,4 @@ const createContractInstance = async c => {
   return await Contract.at(createdContract.address)
 }
 
-export { createContractInstance, setDefaultWeb3Account }
+export { createContractInstance, setDefaultWeb3Account, getNetIdString }

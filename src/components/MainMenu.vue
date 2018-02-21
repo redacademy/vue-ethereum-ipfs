@@ -1,19 +1,19 @@
 <template>
   <div>
-    <article v-if="netId" class="message is-primary">
+    <article v-if="netIdString" class="message is-primary">
       <div class="message-header">
         <p>Connected To:</p>
       </div>
       <div class="message-body">
-        {{ netId }}
+        {{ netIdString }}
       </div>
     </article>
-    <article v-if="!netId" class="message is-danger">
+    <article v-if="!netIdString" class="message is-danger">
       <div class="message-header">
         <p>Not Connected</p>
       </div>
       <div class="message-body">
-        Please install, <a href="https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn?hl=en">MetaMask</a> to use this app.
+        Please sign in to, <a href="https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn?hl=en">MetaMask</a> to use this app.
       </div>
     </article>
     <aside class="menu">
@@ -21,10 +21,10 @@
         Menu
       </p>
       <ul class="menu-list">
-        <li><router-link exact to="/contract">Create a Contract</a></router-link></li>
-        <li><router-link exact to="/contracts">View Stored Contracts</a></router-link></li>
-        <li><router-link exact to="/">Links</a></router-link></li>
-        <li><router-link exact to="/">Home</a></router-link></li>
+        <li><router-link exact to="/contract">Create a Contract</router-link></li>
+        <li><router-link exact to="/contracts">View Stored Contracts</router-link></li>
+        <li><router-link exact to="/">Links</router-link></li>
+        <li><router-link exact to="/">Home</router-link></li>
       </ul>
     </aside>
   </div>
@@ -33,8 +33,8 @@
 <script>
 export default {
   computed: {
-    netId () {
-      return this.$store.state.netId
+    netIdString() {
+      return this.$store.state.netIdString
     }
   }
 }

@@ -5,7 +5,7 @@
       <div class="columns">
           <main-menu class="column is-one-quarter" />
           <div class="column is-three-quarters">
-              https://hackernoon.com/ether-purchase-power-df40a38c5a2f
+              TODO!
           </div>
       </div>
     </div>
@@ -13,14 +13,14 @@
 </template>
 
 <script>
-    import MainMenu from './MainMenu'
-    import TopNav from './TopNav.vue'
-    export default {
-      components: {
-        MainMenu,
-        TopNav
-      }
-    }
+import MainMenu from './MainMenu'
+import TopNav from './TopNav.vue'
+export default {
+  components: {
+    MainMenu,
+    TopNav
+  }
+}
 </script>
 
 <style lang="sass" scoped>

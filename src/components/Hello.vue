@@ -18,7 +18,7 @@
                     </div>
                 </div>
                 <div class="column">
-   
+
                 </div>
               </div>
           </div>
@@ -32,5 +32,5 @@ export default {}
 </script>
 
 <style lang="sass">
-    
+
 </style>
