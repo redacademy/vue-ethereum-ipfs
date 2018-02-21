@@ -5,16 +5,14 @@
   "author": "10thfloor <remember.mackenzie@gmail.com>",
   "private": true,
   "scripts": {
-    "dev":
-      "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
+    "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
     "start": "npm run dev",
     "unit": "jest --config test/unit/jest.conf.js --coverage",
     "e2e": "node test/e2e/runner.js",
     "test": "npm run unit && npm run e2e",
     "lint": "eslint --ext .js,.vue src test/unit test/e2e/specs",
     "build": "export IPFS_PUBKEY= && node build/build.js",
-    "publish:ipfs":
-      "npm run test && node build/build.js && node build/ipfs-publish.js"
+    "publish:ipfs": "npm run test && node build/build.js && node build/ipfs-publish.js"
   },
   "dependencies": {
     "bulma": "^0.6.2",
@@ -87,8 +85,12 @@
     "webpack-merge": "^4.1.0"
   },
   "engines": {
-    "node": ">= 9.0.0",
+    "node": ">= 8.9.4",
     "npm": ">= 5.5.1"
   },
-  "browserslist": ["> 1%", "last 2 versions", "not ie <= 8"]
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 8"
+  ]
 }
