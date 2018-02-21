@@ -23,7 +23,6 @@
       <ul class="menu-list">
         <li><router-link exact to="/contract">Create a Contract</router-link></li>
         <li><router-link exact to="/contracts">View Stored Contracts</router-link></li>
-        <li><router-link exact to="/">Links</router-link></li>
         <li><router-link exact to="/">Home</router-link></li>
       </ul>
     </aside>

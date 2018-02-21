@@ -4,17 +4,18 @@ import App from './App'
 import router from './router'
 import store from './store'
 import * as OfflinePluginRuntime from 'offline-plugin/runtime'
-import { setDefaultWeb3Account, getNetIdString } from './web3Service'
+import { getDefaultEthWallet, getNetIdString } from './web3Service'
 Vue.config.productionTip = false
 Vue.use(VueForm)
 ;(async () => {
   try {
-    const defaultEthWallet = await setDefaultWeb3Account()
-    const blockchainId = await getNetIdString()
-    store.commit('setNetworkId', blockchainId)
+    const defaultEthWallet = await getDefaultEthWallet()
+    const netIdString = await getNetIdString()
+    store.commit('setNetworkId', netIdString)
     store.commit('setDefaultEthWallet', defaultEthWallet)
   } catch (e) {
     // TODO: Handle error
+    // eslint-disable-next-line
     console.log(e)
   } finally {
     new Vue({
@@ -27,6 +28,6 @@ Vue.use(VueForm)
   }
 })()
 
-// PWA using webpack-offline-plugin.
-// This will produce a warning in development mode, you can ignore.
+// PWA build using webpack-offline-plugin.
+// This will produce a warning in development, you can ignore.
 OfflinePluginRuntime.install()

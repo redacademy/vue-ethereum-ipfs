@@ -42,11 +42,13 @@ const webpackConfig = merge(baseWebpackConfig, {
     new webpack.DefinePlugin({
       'process.env': env
     }),
-    new UglifyJsPlugin({
-      uglifyOptions: {
-        compress: {
-          warnings: false
-        }
+    //Tree shaking, dead code elimination.
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        warnings: false
+      },
+      output: {
+        comments: false
       },
       sourceMap: config.build.productionSourceMap,
       parallel: true
@@ -144,19 +146,9 @@ const webpackConfig = merge(baseWebpackConfig, {
         additional: [':externals:'],
         optional: [':rest:']
       },
-      externals: [
-        `${config.build.ipnsOptionalPath}/offline-page.html`,
-        `${config.build.ipnsOptionalPath}index.html`
-      ],
+      externals: [`${config.build.ipnsOptionalPath}index.html`],
       ServiceWorker: {
         navigateFallbackURL: '/'
-      },
-      AppCache: {
-        FALLBACK: {
-          [`${config.build.ipnsOptionalPath || '/'}`]: `${
-            config.build.ipnsOptionalPath
-          }/offline-page.html`
-        }
       }
     })
   ]

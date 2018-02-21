@@ -18,13 +18,16 @@ Contract.setProvider(web3.currentProvider)
 
 const getNetIdString = async () => {
   const id = await web3.eth.net.getId()
+  // TODO: Remove this
   switch (id) {
-    case '1':
+    case 1:
       return 'Main Ethereum Network'
-    case '2':
-      return 'Morden Test Network (Depricated)'
-    case '3':
+    case 3:
       return 'Ropsten Test Network'
+    case 4:
+      return 'Rinkeby Test Network'
+    case 42:
+      return 'Kovan Test Network'
     case 'loading':
       return undefined
     // Will be some random number when connected locally
@@ -33,7 +36,7 @@ const getNetIdString = async () => {
   }
 }
 
-const setDefaultWeb3Account = () =>
+const getDefaultEthWallet = () =>
   new Promise((resolve, reject) => {
     web3.eth.getAccounts((err, res) => {
       if (!err) return resolve(res[0])
@@ -53,19 +56,14 @@ const createContractInstance = async c => {
       arguments: [c.name, c.terms]
     })
     .send({
-      from: web3.eth.defaultAccount,
+      from: c.witness,
 
-      // Gas. These are recommended defaults.
-      gas: 5000000,
+      // Gas.
+      gas: 1500000,
       gasPrice: '20000000000000'
     })
 
-  createdContract
-    .on('error', () => {})
-    .on('receipt', () => {})
-    .on('confirmation', () => {})
-
-  return await Contract.at(createdContract.address)
+  return await Contract.at(createdContract.options.address)
 }
 
-export { createContractInstance, setDefaultWeb3Account, getNetIdString }
+export { createContractInstance, getDefaultEthWallet, getNetIdString }

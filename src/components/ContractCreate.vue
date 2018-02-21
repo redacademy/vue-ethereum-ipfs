@@ -83,16 +83,17 @@ export default {
       contract: {
         name: '',
         terms: '',
-        participant1: undefined, // Add an Ethereum wallet acccount public key
-        participant2: undefined, // Add another Ethereum account public key
+        participant1: '',
+        participant2: '',
         witness: this.$store.state.defaultEthWallet
       }
     }
   },
   methods: {
-    onSubmitContract() {
+    async onSubmitContract() {
       // TODO: validation
-      createContractInstance(this.$data.contract)
+      const contract = await createContractInstance(this.$data.contract)
+      console.log('Contract was created:', contract.contract_name())
     }
   },
   components: {
