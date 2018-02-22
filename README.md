@@ -86,11 +86,19 @@ Importing contracts is done in `src/web3Service.js` <br/>
 Example `web3Service.js`
 ```js
 import contract from 'truffle-contract'
-
 import contractJSON from '../build/contracts/WitnessContract.json'
 
+const Contract = contract({
+  abi: contractJSON.abi,
+  binary: contractJSON.bytecode
+})
+
 const createContractInstance = async c => {
+ 
   // https://github.com/trufflesuite/truffle-contract/issues/70
+  // When this bug is fixed, we'll be able to use the 'Contract' 
+  // above to do the contract instantiation...
+ 
   const newContract = new web3.eth.Contract(contractJSON.abi)
 
   const createdContract = await newContract
