@@ -69,7 +69,7 @@ $ npm start
 Your application is running here: http://localhost:8081
 ```
 
-### Create Your Own Smart Contracts
+### Create your own Smart Contracts
 
 The easiest way to start developing Smart Contracts: <br/>
 #### [https://remix.ethereum.org/](https://remix.ethereum.org/)
@@ -85,28 +85,9 @@ Importing contracts is done in `src/web3Service.js` <br/>
 
 Example `web3Service.js`
 ```js
-// Replace this with your main contract!
-import contractJSON from '../build/contracts/Contract.json'
-
 import contract from 'truffle-contract'
-import Web3 from 'web3'
 
-if (typeof web3 !== 'undefined') {
-  web3 = new Web3(web3.currentProvider)
-} else {
-  web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545'))
-}
-
-web3.eth.getAccounts((err, res) => {
-  web3.eth.defaultAccount = res[0]
-})
-
-const Contract = contract({
-  abi: contractJSON.abi,
-  binary: contractJSON.bytecode
-})
-
-Contract.setProvider(web3.currentProvider)
+import contractJSON from '../build/contracts/WitnessContract.json'
 
 const createContractInstance = async c => {
   // https://github.com/trufflesuite/truffle-contract/issues/70
@@ -115,27 +96,20 @@ const createContractInstance = async c => {
   const createdContract = await newContract
     .deploy({
       data: contractJSON.bytecode,
-      
-      // If your contract has constructor parameters, pass them here.
+
+      // Contract constructor arguments
       arguments: [c.name, c.terms]
     })
     .send({
-      from: web3.eth.defaultAccount,
-      
-      // Gas. These are recommended defaults.
-      gas: 5000000,
+      from: c.witness,
+
+      // Gas.
+      gas: 1500000,
       gasPrice: '20000000000000'
     })
 
-  createdContract
-    .on('error', () => {})
-    .on('receipt', () => {})
-    .on('confirmation', () => {})
-
-  return await Contract.at(address)
+  return await Contract.at(createdContract.options.address)
 }
-
-export { createContractInstance }
 
 ```
 
