@@ -81,43 +81,28 @@ The easiest way to start developing Smart Contracts: <br/>
 
 ### Use your Contracts in the App!
 
-Importing contracts is done in `src/web3Service.js` <br/>
+Example `web3Service.js`. This code demonstrates a contract factory pattern. For the full code see the `web3Service.js` file in the project.
 
-Example `web3Service.js`
 ```js
 import contract from 'truffle-contract'
-import contractJSON from '../build/contracts/WitnessContract.json'
 
-const Contract = contract({
-  abi: contractJSON.abi,
-  binary: contractJSON.bytecode
-})
+import contractJSON from '../build/contracts/WitnessContract.json'
+const Contract = contract(contractJSON)
 
 const createContractInstance = async c => {
- 
-  // https://github.com/trufflesuite/truffle-contract/issues/70
-  // When this bug is fixed, we'll be able to use the 'Contract' 
-  // above to do the contract instantiation...
- 
-  const newContract = new web3.eth.Contract(contractJSON.abi)
-
-  const createdContract = await newContract
-    .deploy({
-      data: contractJSON.bytecode,
-
-      // Contract constructor arguments
-      arguments: [c.name, c.terms]
-    })
-    .send({
+  try {
+    const newContract = await Contract.new(c.name, c.terms, {
       from: c.witness,
-
-      // Gas.
-      gas: 1500000,
-      gasPrice: '20000000000000'
+      gasPrice: 2000000000,
+      gas: '2000000'
     })
-
-  return await Contract.at(createdContract.options.address)
+    return newContract
+  } catch (e) {
+    console.log(e, 'Error creating contract...')
+  }
 }
+
+export { createContractInstance }
 
 ```
 
