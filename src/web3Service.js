@@ -1,69 +1,54 @@
-import contract from 'truffle-contract'
 import Web3 from 'web3'
+import contract from 'truffle-contract'
 
 import contractJSON from '../build/contracts/WitnessContract.json'
+const Contract = contract(contractJSON)
 
 if (typeof web3 !== 'undefined') {
   web3 = new Web3(web3.currentProvider)
+  Contract.setProvider(web3.currentProvider)
 } else {
   web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545'))
+  Contract.setProvider(new Web3.providers.HttpProvider('http://localhost:8545'))
 }
 
-const Contract = contract({
-  abi: contractJSON.abi,
-  binary: contractJSON.bytecode
-})
-
-Contract.setProvider(web3.currentProvider)
+const NETWORKS = {
+  '1': 'Main Net',
+  '2': 'Deprecated Morden test network',
+  '3': 'Ropsten test network',
+  '4': 'Rinkeby test network',
+  '42': 'Kovan test network'
+}
 
 const getNetIdString = async () => {
   const id = await web3.eth.net.getId()
-  // TODO: Remove this
-  switch (id) {
-    case 1:
-      return 'Main Ethereum Network'
-    case 3:
-      return 'Ropsten Test Network'
-    case 4:
-      return 'Rinkeby Test Network'
-    case 42:
-      return 'Kovan Test Network'
-    case 'loading':
-      return undefined
-    // Will be some random number when connected locally
-    default:
-      return 'Local Test Net'
+  if (typeof id === 'number') {
+    return NETWORKS[id] || 'Truffle Test Network'
+  } else {
+    return ''
   }
 }
 
-const getDefaultEthWallet = () =>
+const getEthWallets = () =>
   new Promise((resolve, reject) => {
     web3.eth.getAccounts((err, res) => {
-      if (!err) return resolve(res[0])
+      if (!err) return resolve(res)
       reject(err)
     })
   })
 
 const createContractInstance = async c => {
-  // https://github.com/trufflesuite/truffle-contract/issues/70
-  const newContract = new web3.eth.Contract(contractJSON.abi)
-
-  const createdContract = await newContract
-    .deploy({
-      data: contractJSON.bytecode,
-
-      // Contract constructor arguments
-      arguments: [c.name, c.terms]
-    })
-    .send({
+  try {
+    const newContract = await Contract.new(c.name, c.terms, {
       from: c.witness,
-
-      // Gas.
-      gas: 1500000,
-      gasPrice: '20000000000000'
+      gasPrice: 2000000000,
+      gas: '2000000'
     })
-
-  return await Contract.at(createdContract.options.address)
+    return newContract
+  } catch (e) {
+    console.log(e, 'Error creating contract...')
+    return undefined
+  }
 }
 
-export { createContractInstance, getDefaultEthWallet, getNetIdString }
+export { createContractInstance, getEthWallets, getNetIdString }

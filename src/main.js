@@ -4,15 +4,19 @@ import App from './App'
 import router from './router'
 import store from './store'
 import * as OfflinePluginRuntime from 'offline-plugin/runtime'
-import { getDefaultEthWallet, getNetIdString } from './web3Service'
+
+import { getNetIdString, getEthWallets } from './web3Service'
+import OrbitDB from './OrbitDBPlugin'
+
 Vue.config.productionTip = false
 Vue.use(VueForm)
+Vue.use(OrbitDB)
 ;(async () => {
   try {
-    const defaultEthWallet = await getDefaultEthWallet()
+    const ethWallets = await getEthWallets()
     const netIdString = await getNetIdString()
     store.commit('setNetworkId', netIdString)
-    store.commit('setDefaultEthWallet', defaultEthWallet)
+    store.commit('setDefaultEthWallet', ethWallets[0])
   } catch (e) {
     // TODO: Handle error
     // eslint-disable-next-line
@@ -28,6 +32,4 @@ Vue.use(VueForm)
   }
 })()
 
-// PWA build using webpack-offline-plugin.
-// This will produce a warning in development, you can ignore.
 OfflinePluginRuntime.install()
